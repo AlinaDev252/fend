@@ -45,16 +45,23 @@ const createNavLists = () => {
 };
 
 // Add class 'active' to section when near top of viewport
+
 const makeActive = () => {
-	const section = document.querySelectorAll("section");
-	for (const active of section) {
-		const position = active.getBoundingClientRect();
+	const links = document.getElementsByClassName("menu__link");
+	// Iterate through every section and check if it is in the view-port
+	for (const section of sections) {
+		const position = section.getBoundingClientRect();
 		if (position.top <= 150 && position.bottom >= 150) {
 			// Apply active state on the current section and the corresponding Nav link.
-			active.classList.add("your-active-class");
+			section.classList.add("your-active-class");
+			for (const link of links) {
+				if (link.classList.contains(section.id)) {
+					link.classList.add("active");
+				}
+			}
 		} else {
 			// Remove active state from other section and corresponding Nav link.
-			active.classList.remove("your-active-class");
+			section.classList.remove("your-active-class");
 		}
 	}
 };
