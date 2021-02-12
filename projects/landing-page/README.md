@@ -1,10 +1,8 @@
 # Landing Page Project
 
-## Table of Contents
+This project is part of Udacity's Front End Web Developer - Nanodegree Program.
 
 ## Instructions
-
-This project is part of Udacity's Front End Web Developer - Nanodegree Program.
 
 The main requirement is to build a multi-section landing page, with a dynamically updating navigational menu based on the amount of content that is added to the page.
 
