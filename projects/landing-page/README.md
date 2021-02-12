@@ -2,8 +2,6 @@
 
 ## Table of Contents
 
-- [Instructions](#instructions)
-
 ## Instructions
 
 This project is part of Udacity's Front End Web Developer - Nanodegree Program.
