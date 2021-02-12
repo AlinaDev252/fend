@@ -8,20 +8,29 @@
  *
 */
 
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Handlee&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+
 /* ---- Base Rules ---- */
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	background: rgb(136, 203, 171);
 	background: linear-gradient(0deg, rgba(136, 203, 171, 1) 0%, rgba(0, 13, 60, 1) 100%);
 	margin: 0;
-	font-family: "Merriweather", serif;
+	font-family: "Patrick Hand", cursive;
 	color: #fff;
 }
 
 /* Typeography General*/
 h1 {
-	font-family: "Fira Sans", sans-serif;
+	font-family: "Handlee", cursive;
 	font-size: 3em;
 	margin: 2em 1rem;
+	text-align: center;
 }
 
 @media only screen and (min-width: 35em) {
@@ -33,22 +42,27 @@ h1 {
 
 h2 {
 	border-bottom: 1px solid #cc1;
-	font-family: "Oxygen", Sans-Serif;
+	font-family: "Handlee", cursive;
 	font-size: 3em;
 	color: #fff;
+}
+header h2 {
+	font-size: 3em;
+	font-style: italic;
+	text-align: center;
 }
 
 p {
 	line-height: 1.6em;
 	color: #eee;
+	font-size: 20px;
 }
 
 /* ---- Layout Rules ---- */
 main {
 	margin: 10vh 1em 10vh;
 }
-
-.main-hero {
+vbar .main-hero {
 	min-height: 40vh;
 	padding-top: 3em;
 }
@@ -64,16 +78,25 @@ section {
 .navbar__menu ul {
 	padding-left: 0;
 	margin: 0;
-	text-align: center;
+	text-align: left;
 	background-color: #ccc;
-	color: blue;
-	height: 60px;
+	height: 70px;
 	text-transform: capitalize;
 }
 
 .navbar__menu li {
 	display: inline-block;
 	padding: 20px 20px;
+	font: bold;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+#navbar__list {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	text-decoration: none;
 }
 
 .navbar__menu .menu__link {
@@ -88,6 +111,7 @@ section {
 	background: #333;
 	color: #fff;
 	transition: ease 0.3s all;
+	cursor: pointer;
 }
 
 /* Header Styles */
@@ -198,10 +222,6 @@ section.your-active-class {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-.active {
-	color: red;
-	background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-}
 section.your-active-class .landing__container::before {
 	opacity: 1;
 	animation: rotate 4s linear 0s infinite forwards;
@@ -220,4 +240,31 @@ section.your-active-class .landing__container::after {
 	to {
 		transform: rotate(360deg) translate(-1em) rotate(-360deg);
 	}
+}
+
+/* Scroll to top button styles */
+#myBtn {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 50px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	background-color: white;
+	color: black;
+	cursor: pointer;
+	padding: 10px 15px;
+	border-radius: 15px;
+}
+
+#myBtn:hover {
+	background-color: #248232;
+}
+
+/* Styling for class 'active' to section when near top of viewport*/
+.active-class {
+	background-color: #248232;
+	padding: 5px;
 }

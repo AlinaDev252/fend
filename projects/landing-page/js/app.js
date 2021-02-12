@@ -17,8 +17,11 @@
  * Define Global Variables
  *
  */
-const sections = document.getElementsByTagName("section");
-
+const sections = document.querySelectorAll("section");
+const navBarList = document.querySelector("#navbar__list");
+myButton = document.getElementById("myBtn");
+const navLinks = document.querySelectorAll(".navbar__link");
+const items = ["Home", "Products", "Tips&Tricks", "Best Sellers"];
 /**
  * End Global Variables
  * Start Helper Functions
@@ -32,41 +35,79 @@ const sections = document.getElementsByTagName("section");
  */
 
 // build the nav
-const createNavLists = () => {
-	for (section of sections) {
-		const navList = document.getElementById("navbar__list");
-		const navItem = document.createElement("li");
-		const navItemLink = document.createElement("a");
-		navItemLink.textContent = section.id;
-		// append link to the navItem
-		navItem.appendChild(navItemLink);
-		navList.appendChild(navItem);
-	}
-};
+
+function createListItem(id, name) {
+	const listItem = document.createElement("li");
+	const anchor = document.createElement("a");
+	anchor.textContent = name;
+	anchor.href = "#" + id;
+	anchor.id = "#" + id;
+	listItem.classList.add("navbar__link");
+	listItem.appendChild(anchor);
+	navBarList.appendChild(listItem);
+}
+
+function createNav() {
+	sections.forEach((section) => createListItem(section.id, items));
+}
 
 // Add class 'active' to section when near top of viewport
 
-const makeActive = () => {
-	const links = document.getElementsByClassName("menu__link");
-	// Iterate through every section and check if it is in the view-port
-	for (const section of sections) {
-		const position = section.getBoundingClientRect();
-		if (position.top <= 150 && position.bottom >= 150) {
-			// Apply active state on the current section and the corresponding Nav link.
-			section.classList.add("your-active-class");
-			for (const link of links) {
-				if (link.classList.contains(section.id)) {
-					link.classList.add("active");
-				}
-			}
+function activateNavLinks(id) {
+	const allNavLists = document.querySelectorAll(".navbar__link");
+	allNavLists.forEach((navLink) => {
+		if (navLink.childNodes[0].id.substring(1) === id) {
+			console.log(true);
+			navLink.childNodes[0].classList.add("active-class");
 		} else {
-			// Remove active state from other section and corresponding Nav link.
-			section.classList.remove("your-active-class");
+			console.log(false);
+			navLink.childNodes[0].classList.remove("active-class");
 		}
-	}
-};
+	});
+}
+function activeClassAssign() {
+	sections.forEach((section) =>
+		window.addEventListener("scroll", function () {
+			if (
+				section.getBoundingClientRect().top + 200 < window.innerHeight &&
+				section.getBoundingClientRect().bottom + 200 > window.innerHeight
+			) {
+				section.classList.add("your-active-class");
+				activateNavLinks(section.id);
+			} else {
+				section.classList.remove("your-active-class");
+			}
+		})
+	);
+}
 
 // Scroll to anchor ID using scrollTO event
+window.onscroll = function () {
+	scrollFunction();
+};
+function scrollFunction() {
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		myButton.style.display = "block";
+	} else {
+		myButton.style.display = "none";
+	}
+}
+function topFunction() {
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
+}
+//Add Smooth scroll function to the anchor elements.
+function smoothScroll() {
+	const links = document.querySelectorAll("a");
+	links.forEach((link) =>
+		link.addEventListener("click", function (e) {
+			e.preventDefault();
+			document.querySelector(this.getAttribute("href")).scrollIntoView({
+				behavior: "smooth",
+			});
+		})
+	);
+}
 
 /**
  * End Main Functions
@@ -75,13 +116,16 @@ const makeActive = () => {
  */
 
 // Build menu
-createNavLists();
+createNav();
+document.querySelector(".navbar__menu").appendChild(navBarList);
 
 // Scroll to section on link click
+smoothScroll();
 
 // Set sections as active
+activeClassAssign();
 
 // Make sections active
 document.addEventListener("scroll", function () {
-	makeActive();
+	activeClassAssign();
 });
