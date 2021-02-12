@@ -41,6 +41,7 @@ function createListItem(id, name) {
 	const anchor = document.createElement("a");
 	anchor.textContent = name;
 	anchor.href = "#" + id;
+	// Add unique id in each navbar item.
 	anchor.id = "#" + id;
 	listItem.classList.add("navbar__link");
 	listItem.appendChild(anchor);
@@ -65,6 +66,7 @@ function activateNavLinks(id) {
 		}
 	});
 }
+
 function activeClassAssign() {
 	sections.forEach((section) =>
 		window.addEventListener("scroll", function () {
