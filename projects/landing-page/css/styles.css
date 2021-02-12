@@ -48,8 +48,8 @@ h2 {
 }
 header h2 {
 	font-size: 3em;
-	font-style: italic;
 	text-align: center;
+	border-bottom: 1px solid darkseagreen;
 }
 
 p {

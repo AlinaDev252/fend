@@ -21,7 +21,7 @@ const sections = document.querySelectorAll("section");
 const navBarList = document.querySelector("#navbar__list");
 myButton = document.getElementById("myBtn");
 const navLinks = document.querySelectorAll(".navbar__link");
-const items = ["Home", "Products", "Tips&Tricks", "Best Sellers"];
+
 /**
  * End Global Variables
  * Start Helper Functions
@@ -48,7 +48,7 @@ function createListItem(id, name) {
 }
 
 function createNav() {
-	sections.forEach((section) => createListItem(section.id, items));
+	sections.forEach((section) => createListItem(section.id, section.dataset.nav));
 }
 
 // Add class 'active' to section when near top of viewport
