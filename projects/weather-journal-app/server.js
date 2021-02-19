@@ -39,10 +39,22 @@ app.get("/all", function (request, response) {
 });
 
 // Post Route
+// app.post("/add", postData)
+
+// app.post("/add", function (req, res) {
+// 	let newEntry = {
+// 		temperature: req.body.temp,
+// 		date: req.body.date,
+// 		userResponse: req.body.content,
+// 	};
+// 	projectData = newEntry;
+// 	res.send(projectData);
+// });
+
 app.post("/add", postData);
 
-function postData(req, res) {
-	projectData.push(req.body);
-	res.send("POST received");
-	console.log(req);
+function postData(request, response) {
+	projectData = request.body;
+	response.send({ message: "Post received" });
+	console.log(projectData);
 }
