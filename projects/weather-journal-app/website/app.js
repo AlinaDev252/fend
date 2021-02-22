@@ -1,25 +1,43 @@
 /* Global Variables */
-let baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
 
 // Personal API Key for OpenWeatherMap API
-const apiKey = "&appid=6c31832a1258f53fbea517b9e487dcf8";
+const apiKey = "&units=metric&appid=6c31832a1258f53fbea517b9e487dcf8";
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById("generate").addEventListener("click", getWeather);
 
 /* Function called by event listener */
 function getWeather(e) {
-	let zipCode = document.getElementById("zip").value;
-	let userResponse = document.getElementById("feelings").value;
+	// e.preventDefault();
+	const zipCode = document.getElementById("zip").value;
+	const userResponse = document.getElementById("feelings").value;
 	getWeatherDetails(baseURL, zipCode, apiKey)
 		.then(function (weatherInfo) {
 			console.log("Checking weather info", weatherInfo);
+
+			const temperature = weatherInfo.main.temp;
+			const city = weatherInfo.name;
+			const description = weatherInfo.weather[0].description;
+			const windSpeed = weatherInfo.wind.speed;
+			const humidity = weatherInfo.main.humidity;
+			const country = weatherInfo.sys.country;
+			const date = newDate;
 			// Post weather details to the server
-			postData("/add", { temperature: weatherInfo.main.temp, userResponse: userResponse, date: newDate });
+			postData("/add", {
+				temperature,
+				city,
+				description,
+				windSpeed,
+				humidity,
+				userResponse,
+				country,
+				date,
+			});
 
 			//  Call UpdateUI function after click and weather details are gathered
 		})
@@ -30,10 +48,11 @@ function getWeather(e) {
 
 /* Function to GET Web API Data*/
 
-const getWeatherDetails = async (baseURL, zip, apiKey) => {
-	const res = await fetch(baseURL + zip + apiKey);
+const getWeatherDetails = async (baseURL, zipCode, apiKey) => {
+	const response = await fetch(baseURL + zipCode + apiKey);
 	try {
-		const data = await res.json();
+		const data = await response.json();
+		console.log(data);
 		return data;
 	} catch (error) {
 		console.log("error", error);
@@ -46,21 +65,27 @@ async function postData(url = "", data = {}) {
 		method: "POST",
 		credentials: "same-origin",
 		headers: { "Content-Type": "application/json" },
-		// Body data type must match "Content-Type" header
 		body: JSON.stringify(data),
 	});
 }
 
 /* Function to GET Project Data */
-const updateUI = async () => {
-	const request = await fetch("/all");
+async function updateUI() {
+	// GET function that takes the info from the server
+	const response = await fetch("/all");
 	try {
-		const allData = await request.json();
-		// console.log("all data: ", allData);
-		document.getElementById("date").innerHTML = allData.date;
-		document.getElementById("temp").innerHTML = allData.temperature;
-		document.getElementById("content").innerHTML = allData.userResponse;
+		const lastEntry = await response.json();
+		console.log(lastEntry);
+		document.getElementById("city").innerHTML = "Weather in " + lastEntry.city;
+		document.getElementById("country").innerHTML = "Country: " + lastEntry.country;
+		document.getElementById("temperature").innerHTML =
+			"Current temperature: " + Math.floor(lastEntry.temperature) + "°C";
+		document.getElementById("description").innerHTML = "Wearher description: " + lastEntry.description;
+		document.getElementById("humidity").innerHTML = "Humidity: " + lastEntry.humidity + "%";
+		document.getElementById("wind").innerHTML = "Wind speed: " + lastEntry.windSpeed + "km/H";
+		document.getElemenyById("date").innerHTML = lastEntry.date;
+		document.getElementById("content").innerHTML = lastEntry.userResponse;
 	} catch (error) {
-		console.log("error", error);
+		console.log("Error", error);
 	}
-};
+}
