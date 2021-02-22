@@ -3,7 +3,7 @@ const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+let newDate = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
 
 // Personal API Key for OpenWeatherMap API
 const apiKey = "&units=metric&appid=6c31832a1258f53fbea517b9e487dcf8";
@@ -75,15 +75,15 @@ async function updateUI() {
 	try {
 		const lastEntry = await response.json();
 		console.log(lastEntry);
-		document.getElementById("city").innerHTML = "Weather in " + lastEntry.city;
+		document.getElementById("city").innerHTML = "City: " + lastEntry.city;
 		document.getElementById("country").innerHTML = "Country: " + lastEntry.country;
 		document.getElementById("temperature").innerHTML =
 			"Current temperature: " + Math.floor(lastEntry.temperature) + "°C";
-		document.getElementById("description").innerHTML = "Wearher description: " + lastEntry.description;
+		document.getElementById("description").innerHTML = "Weather description: " + lastEntry.description;
 		document.getElementById("humidity").innerHTML = "Humidity: " + lastEntry.humidity + "%";
 		document.getElementById("wind").innerHTML = "Wind speed: " + lastEntry.windSpeed + "km/H";
-		document.getElemenyById("date").innerHTML = newDate;
-		document.getElementById("content").innerHTML = lastEntry.input;
+		document.getElementById("date").innerHTML = "Today's date: " + newDate;
+		document.getElementById("content").innerHTML = "Your feelings for today: " + lastEntry.input;
 	} catch (error) {
 		console.log("Error", error);
 	}
