@@ -13,7 +13,7 @@ document.getElementById("generate").addEventListener("click", getWeather);
 
 /* Function called by event listener */
 function getWeather(e) {
-	// e.preventDefault();
+	e.preventDefault();
 	const zipCode = document.getElementById("zip").value;
 	const userResponse = document.getElementById("feelings").value;
 	getWeatherDetails(baseURL, zipCode, apiKey)
@@ -26,7 +26,7 @@ function getWeather(e) {
 			const windSpeed = weatherInfo.wind.speed;
 			const humidity = weatherInfo.main.humidity;
 			const country = weatherInfo.sys.country;
-			const date = newDate;
+			const input = userResponse;
 			// Post weather details to the server
 			postData("/add", {
 				temperature,
@@ -34,9 +34,8 @@ function getWeather(e) {
 				description,
 				windSpeed,
 				humidity,
-				userResponse,
 				country,
-				date,
+				input,
 			});
 
 			//  Call UpdateUI function after click and weather details are gathered
@@ -83,8 +82,8 @@ async function updateUI() {
 		document.getElementById("description").innerHTML = "Wearher description: " + lastEntry.description;
 		document.getElementById("humidity").innerHTML = "Humidity: " + lastEntry.humidity + "%";
 		document.getElementById("wind").innerHTML = "Wind speed: " + lastEntry.windSpeed + "km/H";
-		document.getElemenyById("date").innerHTML = lastEntry.date;
-		document.getElementById("content").innerHTML = lastEntry.userResponse;
+		document.getElemenyById("date").innerHTML = newDate;
+		document.getElementById("content").innerHTML = lastEntry.input;
 	} catch (error) {
 		console.log("Error", error);
 	}
