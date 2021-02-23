@@ -81,7 +81,7 @@ async function updateUI() {
 			"Current temperature: " + Math.floor(lastEntry.temperature) + "°C";
 		document.getElementById("description").innerHTML = "Weather description: " + lastEntry.description;
 		document.getElementById("humidity").innerHTML = "Humidity: " + lastEntry.humidity + "%";
-		document.getElementById("wind").innerHTML = "Wind speed: " + lastEntry.windSpeed + "km/H";
+		document.getElementById("wind").innerHTML = "Wind speed: " + lastEntry.windSpeed + "km/h";
 		document.getElementById("date").innerHTML = "Today's date: " + newDate;
 		document.getElementById("content").innerHTML = "Your feelings for today: " + lastEntry.input;
 	} catch (error) {

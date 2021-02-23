@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&family=Indie+Flower&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mali:wght@500&display=swap");
+
+html {
+	scroll-behavior: smooth;
+}
 
 body {
 	font-family: "Oswald", sans-serif;
@@ -31,26 +34,27 @@ body {
 }
 
 .entry {
-	background: rgba(59, 74, 107, 0.4);
+	/* background: rgba(59, 74, 107, 0.4); */
+	background-color: #023047;
+	font-family: "Inconsolata", monospace;
+	font-weight: 700;
 	color: black;
 	align-self: left;
-	margin-left: 35px;
+	margin-left: 30px;
 	padding: 0px 15px;
 	border-radius: 15px;
-	margin-right: 470px;
+	margin-right: 480px;
 }
 
 #entryHolder {
 	width: 403px;
+	color: white;
+	padding-bottom: 15px;
 }
 
-#date {
-}
-
-#temp {
-}
-
-#content {
+#entryHolder p {
+	color: #fb8500;
+	font-size: 25px;
 }
 
 .headline {
@@ -74,21 +78,21 @@ label {
 	display: block;
 	font-size: 27px;
 	color: black;
-	margin-bottom: 12px;
 }
 
 input {
 	display: block;
 	height: 60px;
-	width: 360px;
+	width: 455px;
 	background: #ffde5c;
 	color: black;
 	font-size: 20px;
 	font-family: "Inconsolata", monospace;
+	font-weight: 400;
 	border: none;
 	padding: 0px 15px;
 	border-radius: 15px;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 }
 
 #zip ::-webkit-input-placeholder {
@@ -106,8 +110,13 @@ button {
 	box-shadow: 2px 4px 5px #444;
 	padding: 0px 15px;
 	border-radius: 15px;
-	margin-left: 150px;
-	margin-right: 40px;
+	margin-left: 120px;
+	margin-right: 60px;
+}
+
+#generate:hover {
+	color: orange;
+	transition: 0.3s ease;
 }
 
 h1 {
@@ -118,7 +127,7 @@ textarea {
 	background: #ffde5c;
 	color: black;
 	font-size: 20px;
-	font-family: "Oswald", sans-serif;
+	font-family: "Inconsolata", monospace;
 	margin-right: 450px;
 	border-radius: 15px;
 }
